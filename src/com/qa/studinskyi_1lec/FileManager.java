@@ -16,9 +16,12 @@ public class FileManager {
         String command = reader.readLine();
         while (!command.equals("0")) {
             if (command.equals("1")) {
-                System.out.println("запуск просмотра списка файлов");
+                System.out.println("просмотр списка файлов");
             } else if(command.equals("2"))  {
-                System.out.println("запуск создания файла");
+                System.out.println("создание файла");
+            }
+            else if(command.equals("3"))  {
+                System.out.println("удаление файла");
             }
             command = reader.readLine();
         }
