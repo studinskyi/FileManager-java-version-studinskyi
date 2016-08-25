@@ -39,6 +39,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        reader.close();
         System.out.println("Работа программы файлового менеджера завершена!");
     }
 }
