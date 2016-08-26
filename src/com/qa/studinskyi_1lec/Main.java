@@ -8,14 +8,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        FileManager.setFolderFile("e:\\Java_projects\\QA_Hillel_DEV\\test_folder\\");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        FileManager.setFolderFile("c:\\test_QA\\");
 
         Menu menu = new Menu();
-        menu.reader = reader;
         menu.runMenu();
+        menu.getReader().close();
 
-        reader.close();
         System.out.println("Работа программы файлового менеджера завершена!");
     }
 }
