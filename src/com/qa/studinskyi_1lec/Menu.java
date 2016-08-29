@@ -62,6 +62,11 @@ public class Menu {
                     FileManager.renameFile();
                     break;
                 }
+                case "5": {
+                    System.out.println("show file");
+                    FileManager.showFile();
+                    break;
+                }
                 case "9": {
                     System.out.println("print menu");
                     printMenu();
@@ -80,8 +85,9 @@ public class Menu {
         System.out.println("0 - exit");
         System.out.println("1 - list files");
         System.out.println("2 - create file");
-//        System.out.println("3 - delet file");
-//        System.out.println("4 - rename file");
+        System.out.println("3 - delet file");
+        System.out.println("4 - rename file");
+        System.out.println("5 - show file");
         System.out.println("9 - print menu");
 
     }
