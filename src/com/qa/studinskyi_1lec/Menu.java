@@ -19,22 +19,13 @@ public class Menu {
 
         String command = null;
         try {
-            command = FileManager.getReader().readLine();
+            command = FileManager.reader.readLine();
+            //command = FileManager.getReader().readLine();
         } catch (IOException e) {
             command = "";
             //e.printStackTrace();
         }
 
-//        Scanner in = new Scanner(System.in);
-//        // Считывает строку с номером команды из консоли
-//        //и сохраняет ее в переменную
-//        String command = null;
-//        try {
-//            command = in.nextLine();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        in.close();
         System.out.println("Selected answer : " + command);
         // передаем номер строку с номером выбранной команды назад в метод runMenu()
         return command;
@@ -63,12 +54,12 @@ public class Menu {
                 }
                 case "3": {
                     System.out.println("start delete file");
-                    FileManager.deleteFile("testFile");
+                    FileManager.deleteFile();
                     break;
                 }
                 case "4": {
                     System.out.println("start rename file");
-                    FileManager.renameFile("testFile", "testFile2");
+                    FileManager.renameFile();
                     break;
                 }
                 case "9": {
@@ -89,8 +80,8 @@ public class Menu {
         System.out.println("0 - exit");
         System.out.println("1 - list files");
         System.out.println("2 - create file");
-        System.out.println("3 - delet file");
-        System.out.println("4 - rename file");
+//        System.out.println("3 - delet file");
+//        System.out.println("4 - rename file");
         System.out.println("9 - print menu");
 
     }

@@ -8,13 +8,11 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        FileManager.setFolderFile("c:\\test_QA\\");
-        FileManager.setReader(new BufferedReader(new InputStreamReader(System.in)));
-
+        FileManager.folderFile = "c:\\test_QA\\";
+        FileManager.reader = new BufferedReader(new InputStreamReader(System.in));
         Menu menu = new Menu();
         menu.runMenu();
-        FileManager.getReader().close();
-        //menu.getReader().close();
+        FileManager.reader.close();
 
         //        МИНИМУМ
         //        Что из Java Core мы не рассмотрели выполняя задачу FileManager - то и рассмотрим на следующем занятии
@@ -26,6 +24,6 @@ public class Main {
         //        ПОВЫШЕННАЯ СЛОЖНОСТЬ
         //        имплементировать методы findWordOccurrenceInFile(), replaceWordInFile(), showLineNumbersWhereWordWasFound()
 
-        System.out.println("Работа программы файлового менеджера завершена!");
+        System.out.println("File manager program completed its work and is closed!");
     }
 }
