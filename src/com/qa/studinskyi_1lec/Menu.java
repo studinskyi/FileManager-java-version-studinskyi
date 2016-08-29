@@ -5,21 +5,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Menu {
-    private BufferedReader reader;
+    //private BufferedReader reader;
 
-    public BufferedReader getReader() {
-        return reader;
-    }
+//    public BufferedReader getReader() {
+//        return reader;
+//    }
 
-    public Menu() {
-        reader = new BufferedReader(new InputStreamReader(System.in));
-    }
+//    public Menu() {
+//        reader = new BufferedReader(new InputStreamReader(System.in));
+//    }
 
     private String readAnswer() throws IOException {
 
         String command = null;
         try {
-            command = reader.readLine();
+            command = FileManager.getReader().readLine();
         } catch (IOException e) {
             command = "";
             //e.printStackTrace();
@@ -58,7 +58,7 @@ public class Menu {
                 }
                 case "2": {
                     System.out.println("start create file");
-                    FileManager.createFile("testFile");
+                    FileManager.createFile();
                     break;
                 }
                 case "3": {

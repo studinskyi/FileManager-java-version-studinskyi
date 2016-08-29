@@ -1,6 +1,7 @@
 package com.qa.studinskyi_1lec;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,16 @@ import java.util.HashMap;
 
 public class FileManager {
     private static String folderFile;
+    private static BufferedReader reader;
+
+    public static void setReader(BufferedReader reader) {
+        FileManager.reader = reader;
+    }
+
+    public static BufferedReader getReader() {
+        return reader;
+    }
+
     private static HashMap<String, String> executedOperations;
 
     public static String getFolderFile() {
@@ -30,26 +41,54 @@ public class FileManager {
             for (File item : dir.listFiles()) {
                 // получаем все вложенные объекты в каталоге
                 if (item.isDirectory())
-                    System.out.println(item.getName() + "  \tкаталог");
+                    System.out.println(item.getName() + "\tкаталог");
                 else
                     System.out.println(item.getName() + "\tфайл");
             }
         }
     }
 
-    public static void createFile(String nameFile) {
+    public static void createFile() throws IOException {
 
-        Date d = new Date();
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy_MM_dd_HHmmss");
-        String fullPathToFile = folderFile + nameFile + "_" + formatDate.format(d) + ".txt";
-        File f = new File(fullPathToFile);
-        // начало блока обработки возможной ислючительной ситуации
+        String nameFile = "";
         try {
-            f.createNewFile();  // код, который потенциально может вызвать исключение (исключительную ситуацию), если
-            // у программы не будет прав на работу с файлом или директорией, которые вы указали.
+            System.out.println("input name of new file ");
+            nameFile = FileManager.getReader().readLine();
         } catch (IOException e) {
-            e.printStackTrace(); // код, который выполниться, если возникнет исклбчительная ситуация
+            nameFile = "";
+            //e.printStackTrace();
         }
+
+        String fullPathToFile = "";
+
+        if (!nameFile.equals("")) {
+            fullPathToFile = folderFile + nameFile + ".txt";
+            File f = new File(fullPathToFile);
+            if (!f.exists()) {
+                // начало блока обработки возможной ислючительной ситуации
+                try {
+                    f.createNewFile();  // код, который потенциально может вызвать исключение (исключительную ситуацию), если
+                    // у программы не будет прав на работу с файлом или директорией, которые вы указали.
+                } catch (IOException e) {
+                    System.out.println("did not created file: " + fullPathToFile);
+                    //e.printStackTrace(); // код, который выполниться, если возникнет исклбчительная ситуация
+                }
+            } else {
+                System.out.println("file is already exists: " + fullPathToFile);
+            }
+        }
+
+//        Date d = new Date();
+//        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy_MM_dd_HHmmss");
+//        String fullPathToFile = folderFile + nameFile + "_" + formatDate.format(d) + ".txt";
+//        File f = new File(fullPathToFile);
+//        // начало блока обработки возможной ислючительной ситуации
+//        try {
+//            f.createNewFile();  // код, который потенциально может вызвать исключение (исключительную ситуацию), если
+//            // у программы не будет прав на работу с файлом или директорией, которые вы указали.
+//        } catch (IOException e) {
+//            e.printStackTrace(); // код, который выполниться, если возникнет исклбчительная ситуация
+//        }
         System.out.println("создание файла " + fullPathToFile);
     }
 
