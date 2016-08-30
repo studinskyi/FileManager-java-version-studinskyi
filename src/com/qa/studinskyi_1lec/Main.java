@@ -9,10 +9,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         FileManager.folderFile = "c:\\test_QA\\";
-        FileManager.reader = new BufferedReader(new InputStreamReader(System.in));
+        //FileManager.reader = new BufferedReader(new InputStreamReader(System.in));
         Menu menu = new Menu();
         menu.runMenu();
-        FileManager.reader.close();
+        //FileManager.reader.close();
 
         //        МИНИМУМ
         //        Что из Java Core мы не рассмотрели выполняя задачу FileManager - то и рассмотрим на следующем занятии
