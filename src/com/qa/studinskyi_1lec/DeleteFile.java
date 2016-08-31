@@ -6,7 +6,7 @@ import java.io.IOException;
 public class DeleteFile extends FileManager {
     @Override
     public String getName() {
-        // "3 - delete file"
+        // "rm - delete file"
         return "delete file";
     }
 
@@ -14,23 +14,24 @@ public class DeleteFile extends FileManager {
     public void execute() {
         String fullPathToFile = "";
         String nameFile = "";
-        String answer = "";
-        while (true) {
+
+        // проверка наличия введенного параметра имени файла
+        if (FileManager.commandParameters.size() > 1) {
             try {
-                System.out.println("Delete file? y\\n ");
-                answer = FileManager.reader.readLine();
-            } catch (IOException e) {
-                answer = "";
-            }
-            if (!answer.equals("y")) {
-                System.out.println("file deletion is canceled");
-                break;
-            }
-            try {
-                System.out.println("enter the name of the file to delete:");
-                nameFile = FileManager.reader.readLine();
-            } catch (IOException e) {
+                nameFile = FileManager.commandParameters.get(1);
+            } catch (Exception e) {
                 nameFile = "";
+            }
+        }
+
+        while (true) {
+            if (nameFile.equals("")) {
+                String answer = FileManager.requestLine("Delete file? y\\n");
+                if (!answer.equals("y")) {
+                    System.out.println("file deletion is canceled");
+                    break;
+                }
+                nameFile = FileManager.requestLine("enter the name of the file to delete:");
             }
 
             if (!nameFile.equals("")) {
@@ -43,6 +44,7 @@ public class DeleteFile extends FileManager {
                 } else
                     System.out.println("file does not exist, it can not be deleted: " + fullPathToFile);
             }
+            nameFile = "";
         }
 
         //        File dir = new File(folderFile);

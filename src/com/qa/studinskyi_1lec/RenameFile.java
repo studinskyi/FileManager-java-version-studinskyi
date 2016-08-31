@@ -1,13 +1,11 @@
 package com.qa.studinskyi_1lec;
 
-
 import java.io.File;
-import java.io.IOException;
 
 public class RenameFile extends FileManager {
     @Override
     public String getName() {
-        //"4 - rename file";
+        //"mv - rename file";
         return "rename file";
     }
 
@@ -19,29 +17,40 @@ public class RenameFile extends FileManager {
         String fullPathToSourceFile = "";
         String fullPathToTargetFile = "";
 
-        try {
-            System.out.println("enter the name of the file to rename:");
-            nameSourceFile = FileManager.reader.readLine();
-        } catch (IOException e) {
-            nameSourceFile = "";
+        // проверка наличия введенного параметра имени исходного файла
+        if (FileManager.commandParameters.size() > 1) {
+            try {
+                nameSourceFile = FileManager.commandParameters.get(1);
+            } catch (Exception e) {
+                nameSourceFile = "";
+            }
         }
+
+        // проверка наличия введенного параметра нового имени файла
+        if (FileManager.commandParameters.size() > 2) {
+            try {
+                nameTargetFile = FileManager.commandParameters.get(2);
+            } catch (Exception e) {
+                nameTargetFile = "";
+            }
+        }
+
+        if (nameSourceFile.equals(""))
+            nameSourceFile = FileManager.requestLine("enter the name of the file to rename:");
 
         if (!nameSourceFile.equals("")) {
             fullPathToSourceFile = folderFile + nameSourceFile + ".txt";
-            File f = new File(fullPathToSourceFile);
-            if (f.exists()) {
-                try {
-                    System.out.println("enter the new name of the file:");
-                    nameTargetFile = FileManager.reader.readLine();
-                } catch (IOException e) {
-                    nameTargetFile = "";
-                }
+            File fileSource = new File(fullPathToSourceFile);
+            //if (fileExist(fullPathToSourceFile)) {
+            if (fileSource.exists()) {
+                if (nameTargetFile.equals(""))
+                    nameTargetFile = FileManager.requestLine("enter the new name of the file:");
 
                 if (!nameTargetFile.equals("")) {
                     fullPathToTargetFile = folderFile + nameTargetFile + ".txt";
                     File fileWithNewName = new File(fullPathToTargetFile);
                     if (!fileWithNewName.exists()) {
-                        if (f.renameTo(fileWithNewName))
+                        if (fileSource.renameTo(fileWithNewName))
                             System.out.println("rename file - " + fullPathToSourceFile + " на " + fullPathToTargetFile);
 
                     } else {

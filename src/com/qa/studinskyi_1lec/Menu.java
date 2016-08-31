@@ -9,11 +9,13 @@ public class Menu {
     public Map<String, FileManager> menuItems = new TreeMap<>();
 
     public Menu() {
-        menuItems.put("1", new ListFiles());
-        menuItems.put("2", new CreateFile());
-        menuItems.put("3", new DeleteFile());
-        menuItems.put("4", new RenameFile());
-        menuItems.put("5", new ShowFile());
+        menuItems.put("ls", new ListFiles());
+        menuItems.put("touch", new CreateFile());
+        menuItems.put("rm", new DeleteFile());
+        menuItems.put("mv", new RenameFile());
+        menuItems.put("cat", new ShowFile());
+        menuItems.put("pwd", new CurrentDirectory());
+        menuItems.put("grep", new Grep());
     }
     private void printMenu() {
         System.out.println("File manager menu:");
@@ -25,48 +27,60 @@ public class Menu {
 
     public void runMenu() throws IOException {
         printMenu();
-        String answer = ""; // строка для выбранного варианта из меню
         while (true) {
-            answer = readCommand();
-            if (answer.equals("0")) {
-                try {
-                    System.out.println("Exit the program now? y\\n ");
-                    answer = FileManager.reader.readLine();
-                } catch (IOException e) {
-                    answer = "";
-                }
+            readCommand();
+            if (FileManager.commandParameters.get(0).equals("0")) {
+                String answer = FileManager.requestLine("Exit the program now? y\\n");
                 if (answer.equals("y")) {
                     System.out.println("Exit from the program");
-                    // вместо использования команды завершения программы System.exit(0), прерываем цикл опроса команд
-                    break;
-                } else continue;
+                    break; // вместо использования команды завершения программы System.exit(0), прерываем цикл опроса команд
+                } else continue; // проход на следующий запрос команды
             }
-            if (answer.equals("9")) {
+            if (FileManager.commandParameters.get(0).equals("9")) {
                 printMenu();
                 continue;
             }
 
-            if (!menuItems.containsKey(answer)) {
+            if (!menuItems.containsKey(FileManager.commandParameters.get(0))) {
                 System.out.println("No such command. Try again");
                 printMenu();
                 continue;
             } else {
-                menuItems.get(answer).execute();
+                menuItems.get(FileManager.commandParameters.get(0)).execute();
             }
-
         }
     }
 
-    private String readCommand() throws IOException {
-        System.out.println("current directory: " + FileManager.folderFile);
-        String command = null;
-        try {
-            command = FileManager.reader.readLine();
-        } catch (IOException e) {
-            command = "";
-        }
-        System.out.println("Selected command : " + command);
+    private void readCommand() throws IOException {
+
+        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
+        String[] massCommand = parsingCommanLine(FileManager.requestLine("enter the command:"));
+        //        System.out.println("длина массива " + massCommand.length);
+        FileManager.commandParameters.clear();
+        for (String tekStr : massCommand)
+            FileManager.commandParameters.add(tekStr);
+        //            System.out.println(tekStr);
+
+        //System.out.println("Selected command : " + massCommand[0]);
         // передаем номер строку с номером выбранной команды назад в метод runMenu()
-        return command;
+        //return massCommand;
+    }
+
+    private String[] parsingCommanLine(String strCommand) {
+        String oneSpace  = " ";
+        String twoSpaces = "  ";
+        // свертка пробелов в строке команды, введенной с клавиатуры
+        while (strCommand.indexOf(twoSpaces) >= 0) {
+            String replace = strCommand.replace(twoSpaces, oneSpace);
+            strCommand = replace;
+        }
+        //        while(strCommand.contains("  ")) {
+        //            String replace = strCommand.replace("  ", " ");
+        //            strCommand = replace;
+        //        }
+
+        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
+        String[] massStr = strCommand.split(" ");
+        return massStr;
     }
 }

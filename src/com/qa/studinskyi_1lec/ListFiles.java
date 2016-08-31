@@ -5,7 +5,7 @@ import java.io.File;
 public class ListFiles extends FileManager{
     @Override
     public String getName() {
-        // "1 - list files and catalogs";
+        // "ls - list files and catalogs";
         return "list files and catalogs";
     }
     @Override

@@ -1,7 +1,5 @@
 package com.qa.studinskyi_1lec;
 
-
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,7 +7,7 @@ import java.io.OutputStream;
 public class CreateFile extends FileManager {
     @Override
     public String getName() {
-        // "2 - create file"
+        // "touch - create file"
         return "create file";
     }
 
@@ -17,26 +15,27 @@ public class CreateFile extends FileManager {
     public void execute() {
         String fullPathToFile = "";
         String nameFile = "";
-        String answer = "";
         String textToFile = "";
-        while (true) {
-            try {
-                System.out.println("Create new file? y\\n ");
-                answer = FileManager.reader.readLine();
-            } catch (IOException e) {
-                answer = "";
-            }
-            if (!answer.equals("y")) {
-                System.out.println("file creation is canceled");
-                break;
-            }
 
+        // проверка наличия введенного параметра имени файла
+        if (FileManager.commandParameters.size() > 1) {
             try {
-                System.out.println("input name of new file ");
-                nameFile = FileManager.reader.readLine();
-            } catch (IOException e) {
+                nameFile = FileManager.commandParameters.get(1);
+            } catch (Exception e) {
                 nameFile = "";
             }
+        }
+
+        while (true) {
+            if (nameFile.equals("")) {
+                String answer = FileManager.requestLine("Create new file? y\\n");
+                if (!answer.equals("y")) {
+                    System.out.println("file creation is canceled");
+                    break;
+                }
+                nameFile = FileManager.requestLine("input name of new file ");
+            }
+
             textToFile = "//        МИНИМУМ\n" +
                     "        //        Что из Java Core мы не рассмотрели выполняя задачу FileManager - то и рассмотрим на следующем занятии\n" +
                     "        //        изучить код FileManager и почитать в интрнете по всем не знакомым словам информацию. Все что не сможете переварить - пишите в личку заранее.\n" +
@@ -78,6 +77,7 @@ public class CreateFile extends FileManager {
             //            e.printStackTrace(); // код, который выполниться, если возникнет исклбчительная ситуация
             //        }
             System.out.println("создание файла " + fullPathToFile);
+            nameFile = "";
         }
 
     }
