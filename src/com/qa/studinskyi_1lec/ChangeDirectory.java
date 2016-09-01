@@ -5,8 +5,8 @@ import java.io.File;
 public class ChangeDirectory extends FileManager {
     @Override
     public String getName() {
-        // "cd - chsnge directory"
-        return "create directory (cd \"name directory\")";
+        // "cd - change directory"
+        return "change directory (cd \"name directory\")";
     }
 
     @Override
@@ -28,17 +28,10 @@ public class ChangeDirectory extends FileManager {
             nameDirectory = FileManager.requestLine("input name directory");
 
         if (nameDirectory.equals("..")) {
-            //            String manager_folderFile = FileManager.folderFile;
-            //            //String[] massDirectory = manager_folderFile.split(FileSeparated);
-            //            String[] massDirectory = manager_folderFile.split("\\");
-            //            String currenDir = massDirectory[0];
-            //            for (int i = 1; i < massDirectory.length - 1; i++)
-            //                currenDir += currenDir + FileSeparated + massDirectory[i];
-
             File fDirectory = new File(FileManager.folderFile);
             if (fDirectory.exists()) {
                 String currenDir = fDirectory.getParent();
-                if(currenDir!=null) {
+                if (currenDir != null) {
                     fDirectory = new File(currenDir);
                     if (fDirectory.exists()) {
                         FileManager.folderFile = currenDir;
