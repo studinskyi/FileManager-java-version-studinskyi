@@ -48,7 +48,6 @@ public class Grep extends FileManager{
             fullPathToFile = folderFile + nameFile + ".txt";
             if (fileExist(fullPathToFile)) {
                 //if (f.exists()) {
-
                 Pattern pattern = Pattern.compile(word);
                 String fileContent = "";
                 try {

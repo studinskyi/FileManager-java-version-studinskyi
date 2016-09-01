@@ -1,16 +1,12 @@
 package com.qa.studinskyi_1lec;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class Main {
-
     public static void main(String[] args) throws IOException {
-
         FileManager.folderFile = "c:\\test_QA\\";
-        Menu menu = new Menu();
-        menu.runMenu();
+        FileManager.menu.runMenu();
+        //        Menu menu = new Menu();
+        //        menu.runMenu();
         FileManager.reader.close();
 
         //        МИНИМУМ
@@ -22,7 +18,6 @@ public class Main {
         //        сделать так что бы можно было прололжить создавать файл, пока пользоваль не пожелает закончить эту операцию и перейти к следующей. Например, выбрали 1, создали файл, потом программа спрашивает - продолжить создавать файл или нет?
         //        ПОВЫШЕННАЯ СЛОЖНОСТЬ
         //        имплементировать методы findWordOccurrenceInFile(), replaceWordInFile(), showLineNumbersWhereWordWasFound()
-
         System.out.println("File manager program completed its work and is closed!");
     }
 }
