@@ -4,16 +4,15 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Grep extends FileManager{
+public class Grep extends FileManager {
     @Override
     public String getName() {
-        //
-        return "find word occurrence in file ";
+        // "grep - find word occurrence in file"
+        return "find word occurrence in file";
     }
 
     @Override
     public void execute() {
-
         String fullPathToFile = "";
         String nameFile = "";
         String textToFile = "";
@@ -28,9 +27,8 @@ public class Grep extends FileManager{
                 nameFile = "";
             }
         }
-
         if (nameFile.equals(""))
-           nameFile = FileManager.requestLine("input name of file ");
+            nameFile = FileManager.requestLine("input name of file ");
 
         // проверка наличия введенного слова для поиска
         if (FileManager.commandParameters.size() > 2) {
@@ -40,34 +38,40 @@ public class Grep extends FileManager{
                 word = "";
             }
         }
-
         if (word.equals(""))
             word = FileManager.requestLine("input word to find");
 
         if (!nameFile.equals("")) {
             fullPathToFile = folderFile + nameFile + ".txt";
-            if (fileExist(fullPathToFile)) {
-                //if (f.exists()) {
-                Pattern pattern = Pattern.compile(word);
-                String fileContent = "";
-                try {
-                    fileContent = readFile(fullPathToFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Matcher matcher = pattern.matcher(fileContent);
-                int pos = 0;
-
-                while (matcher.find(pos)) {
-                    count++;
-                    pos = matcher.start() + 1;
-                }
-
-
-            } else
-                System.out.println("file does not exist: " + fullPathToFile);
-        }
+            count = findWordOccurrenceInFile(fullPathToFile, word);
+        } else
+            System.out.println("file does not exist: " + fullPathToFile);
 
         System.out.println("occurrences found words: " + count);
+    }
+
+    public int findWordOccurrenceInFile(String fullPathToFile, String word) {
+        int count = 0;
+
+        if (fileExist(fullPathToFile)) {
+            //if (f.exists()) {
+            Pattern pattern = Pattern.compile(word);
+            String fileContent = "";
+            try {
+                fileContent = readFile(fullPathToFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Matcher matcher = pattern.matcher(fileContent);
+            int pos = 0;
+
+            while (matcher.find(pos)) {
+                count++;
+                pos = matcher.start() + 1;
+            }
+        } else
+            System.out.println("file does not exist: " + fullPathToFile);
+
+        return count;
     }
 }
