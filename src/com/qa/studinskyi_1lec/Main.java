@@ -3,10 +3,8 @@ package com.qa.studinskyi_1lec;
 import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
-        FileManager.folderFile = "c:\\test_QA\\";
+        FileManager.setFolderFile("c:\\test_QA\\");
         FileManager.menu.runMenu();
-        //        Menu menu = new Menu();
-        //        menu.runMenu();
         FileManager.reader.close();
 
         //        МИНИМУМ

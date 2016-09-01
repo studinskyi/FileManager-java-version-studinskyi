@@ -73,10 +73,34 @@ public abstract class FileManager {
         return massStr;
     }
 
+    public static void setFolderFile(String fullPathDirectory) {
+        if(fullPathDirectory.equals(""))
+            fullPathDirectory = "c:\\test_QA\\";
+
+        File fDirectory = new File(fullPathDirectory);
+        if(!fDirectory.exists()) {
+            //myPath.mkdir();  //выбросит исключение, если родительского каталога нет в файловой системе
+            fDirectory.mkdirs();  // создаст и всю цепочку каталгов если их нет.
+            // проверка наличия созданной директории
+            if(fDirectory.exists())
+                FileManager.folderFile = fullPathDirectory;
+                //System.out.println("directory was created: " + fullPathDirectory);
+            else
+                fullPathDirectory = "c:\\";
+            //System.out.println("directory did not created: " + fullPathDirectory);
+        } else
+            FileManager.folderFile = fullPathDirectory; // каталог уже существует
+        //System.out.println("directory is already exists: " + fullPathDirectory);
+
+        System.out.println(FileManager.folderFile + " - current directory");
+        FileManager.folderFile = folderFile;
+    }
+
     public static String readFile(String fullPathToFile) throws IOException {
 
         String textOfFile = "";
-        String line;
+        String line = "";
+        String lineSeparator = System.getProperty("line.separator");
 
         File file = new File(fullPathToFile);
         if (!file.exists()) {
@@ -87,8 +111,8 @@ public abstract class FileManager {
         try (BufferedReader readerFile = new BufferedReader(new InputStreamReader(
                 new FileInputStream(fullPathToFile), StandardCharsets.UTF_8))) {
             while ((line = readerFile.readLine()) != null)
-                //System.out.println(line);
-                textOfFile += line + "\n";
+                //textOfFile += line + "\n";
+                textOfFile += line + lineSeparator;
 
         } catch (IOException e) {
             FileManager.requestLine("error opening file " + fullPathToFile);
@@ -108,23 +132,42 @@ public abstract class FileManager {
         //        } finally {
         //            scanner.close();
         //        }
+
+        //===================== 2 вариант
+        //        List<String> list = new ArrayList<String>();
+        //        String line = "";
+        //        Scanner in = new Scanner(new File(fullPathToFile));
+        //        while (in.hasNextLine()) {
+        //            line = in.nextLine();
+        //            list.add(line);
+        //            System.out.println(line);
+        //        }
+        //        //String[] array = list.toArray(new String[0]);
+        //============== 3 вариант
+        //        BufferedReader reader = new BufferedReader(new FileReader(fullPathToFile));
+        //        String line;
+        //        List<String> lines = new ArrayList<String>();
+        //        while ((line = reader.readLine()) != null) {
+        //            lines.add(line);
+        //            System.out.println(line);
+        //        }
+        //        //        String [] linesAsArray = lines.toArray(new String[lines.size()]);
     }
 
     public static int findWordOccurrenceInFile(String fullPathToFile, String word) {
         int count = 0;
+        String fileContent = "";
 
         if (fileExist(fullPathToFile)) {
             //if (f.exists()) {
             Pattern pattern = Pattern.compile(word);
-            String fileContent = "";
             try {
                 fileContent = readFile(fullPathToFile);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("text of the file has not been read: " + fullPathToFile);
             }
             Matcher matcher = pattern.matcher(fileContent);
             int pos = 0;
-
             while (matcher.find(pos)) {
                 count++;
                 pos = matcher.start() + 1;
@@ -135,7 +178,7 @@ public abstract class FileManager {
         return count;
     }
 
-    public void replaceWordInFile(String fullPathToFile, String wordSource, String wordTarget) {
+    public static void replaceWordInFile(String fullPathToFile, String wordSource, String wordTarget) {
         String textToFile = "";
 
         if (fileExist(fullPathToFile)) {
@@ -145,7 +188,7 @@ public abstract class FileManager {
             try {
                 fileContent = readFile(fullPathToFile);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("text of the file has not been read: " + fullPathToFile);
             }
             Matcher matcher = pattern.matcher(fileContent);
             textToFile = matcher.replaceAll(wordTarget);
@@ -158,14 +201,50 @@ public abstract class FileManager {
             //            System.out.println("Cant extract domain from " + url);
             //        }
 
-            System.out.println(textToFile);
-
             // int pos = 0;
             //            while (matcher.find(pos)) {
             //                count++;
             //                pos = matcher.start() + 1;
             //            }
+            try {
+                OutputStream outStream = new FileOutputStream(fullPathToFile);
+                outStream.write(textToFile.getBytes());
+                outStream.close();
+            } catch (IOException e) {
+                System.out.println("did not replace substring \"" + wordSource + "\" in file: " + fullPathToFile);
+            }
+            System.out.println(textToFile);
+        } else
+            System.out.println("file does not exist: " + fullPathToFile);
+    }
 
+    public static void showLineNumbersWhereWordWasFound(String fullPathToFile, String wordSource) {
+        String fileContent = "";
+
+        if (fileExist(fullPathToFile)) {
+            try {
+                fileContent = readFile(fullPathToFile);
+            } catch (IOException e) {
+                System.out.println("text of the file has not been read: " + fullPathToFile);
+            }
+            String lineSeparator = System.getProperty("line.separator");
+            String[] linesOfText = fileContent.split("\n");
+            //String[] linesOfText = fileContent.split(lineSeparator);
+            for (String str : linesOfText) {
+                if (str.contains(wordSource))
+                    System.out.println(str);
+            }
+
+            //            while (strCommand.indexOf(twoSpaces) >= 0) {
+            //                String replace = strCommand.replace(twoSpaces, oneSpace);
+            //                strCommand = replace;
+            //            }
+            //            //        while(strCommand.contains("  ")) {
+            //            //            String replace = strCommand.replace("  ", " ");
+            //            //            strCommand = replace;
+            //            //        }
+            //            // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
+            //            String[] massStr = strCommand.split(" ");
 
         } else
             System.out.println("file does not exist: " + fullPathToFile);

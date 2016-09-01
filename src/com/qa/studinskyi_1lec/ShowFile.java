@@ -17,7 +17,7 @@ public class ShowFile extends FileManager {
         String nameFile = "";
 
         // проверка наличия введенного параметра имени файла
-        if (FileManager.commandParameters.size() > 1) {
+        if (FileManager.commandParameters.size() > 0) {
             try {
                 nameFile = FileManager.commandParameters.get(1);
             } catch (Exception e) {
@@ -29,7 +29,7 @@ public class ShowFile extends FileManager {
             nameFile = FileManager.requestLine("input name of file");
 
         if (!nameFile.equals(""))
-            fullPathToFile = folderFile + nameFile + ".txt";
+            fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
 
         File file = new File(fullPathToFile);
         if (!file.exists()) {
@@ -46,38 +46,5 @@ public class ShowFile extends FileManager {
         } catch (IOException e) {
             System.out.println("error reading the file contents " + fullPathToFile);
         }
-
-        //        try (BufferedReader reader = new BufferedReader(
-        //                new InputStreamReader(
-        //                        new FileInputStream(fullPathToFile), StandardCharsets.UTF_8))) {
-        //            String line;
-        //            while ((line = reader.readLine()) != null) {
-        //                System.out.println(line);
-        //            }
-        //        } catch (IOException e) {
-        //            FileManager.requestLine("error opening file " + fullPathToFile);
-        //        }
-
-        //===================== 2 вариант
-        //        List<String> list = new ArrayList<String>();
-        //        String line = "";
-        //        Scanner in = new Scanner(new File(fullPathToFile));
-        //        while (in.hasNextLine()) {
-        //            line = in.nextLine();
-        //            list.add(line);
-        //            System.out.println(line);
-        //        }
-        //        //String[] array = list.toArray(new String[0]);
-        //============== 3 вариант
-        //        BufferedReader reader = new BufferedReader(new FileReader(fullPathToFile));
-        //        String line;
-        //        List<String> lines = new ArrayList<String>();
-        //        while ((line = reader.readLine()) != null) {
-        //            lines.add(line);
-        //            System.out.println(line);
-        //        }
-        //        //        String [] linesAsArray = lines.toArray(new String[lines.size()]);
-
-
     }
 }

@@ -13,7 +13,6 @@ public class Sed extends FileManager {
     public void execute() {
         String fullPathToFile = "";
         String nameFile = "";
-        String textToFile = "";
         String wordSource = "";
         String wordTarget = "";
 
@@ -56,7 +55,7 @@ public class Sed extends FileManager {
             wordTarget = FileManager.requestLine("input word to replace");
 
         if (!nameFile.equals("")) {
-            fullPathToFile = folderFile + File.separator + nameFile + ".txt";
+            fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
             count = findWordOccurrenceInFile(fullPathToFile, wordSource);
         } else
             System.out.println("file does not exist: " + fullPathToFile);

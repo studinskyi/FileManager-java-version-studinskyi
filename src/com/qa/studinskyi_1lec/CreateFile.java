@@ -9,7 +9,7 @@ public class CreateFile extends FileManager {
     @Override
     public String getName() {
         // "touch - create file"
-        return "create file (touch \"name file\")";
+        return "create file (touch \"name file\" \"text of file\")";
     }
 
     @Override
@@ -17,6 +17,8 @@ public class CreateFile extends FileManager {
         String fullPathToFile = "";
         String nameFile = "";
         String textToFile = "";
+        String fileContent = "";
+        String lineSeparator = System.getProperty("line.separator");
 
         // проверка наличия введенного параметра имени файла
         if (FileManager.commandParameters.size() > 0) {
@@ -26,6 +28,27 @@ public class CreateFile extends FileManager {
                 nameFile = "";
             }
         }
+
+        // проверка наличия введенного текста для записи в файл
+        if (FileManager.commandParameters.size() > 1) {
+            try {
+                for (int i = 2; i < FileManager.commandParameters.size(); i++)
+                    textToFile += FileManager.commandParameters.get(i) + " ";
+            } catch (Exception e) {
+                textToFile = "";
+            }
+        }
+        if (textToFile.equals(""))
+            textToFile = "ТЕКСТ ФАЙЛА ПО-УМОЛЧАНИЮ" + lineSeparator +
+                    " //        МИНИМУМ" + lineSeparator +
+                    " //        Что из Java Core мы не рассмотрели выполняя задачу FileManager - то и рассмотрим на следующем занятии" + lineSeparator +
+                    " //        изучить код FileManager и почитать в интрнете по всем не знакомым словам информацию. Все что не сможете переварить - пишите в личку заранее." + lineSeparator +
+                    " //                имплементировать deleteFile(), renameFile()" + lineSeparator +
+                    " //        СРЕДНЯЯ СЛОЖНОСТЬ" + lineSeparator +
+                    " //        сделать так что бы программа работала вечно и заканчивала свою работу только, если пользователь выберет 0. выход" + lineSeparator +
+                    " //        сделать так что бы можно было прололжить создавать файл, пока пользоваль не пожелает закончить эту операцию и перейти к следующей. Например, выбрали 1, создали файл, потом программа спрашивает - продолжить создавать файл или нет?" + lineSeparator +
+                    " //        ПОВЫШЕННАЯ СЛОЖНОСТЬ" + lineSeparator +
+                    " //        имплементировать методы findWordOccurrenceInFile(), replaceWordInFile(), showLineNumbersWhereWordWasFound()" + lineSeparator;
 
         while (true) {
             if (nameFile.equals("")) {
@@ -37,25 +60,15 @@ public class CreateFile extends FileManager {
                 nameFile = FileManager.requestLine("input name of new file ");
             }
 
-            textToFile = "//        МИНИМУМ\n" +
-                    "        //        Что из Java Core мы не рассмотрели выполняя задачу FileManager - то и рассмотрим на следующем занятии\n" +
-                    "        //        изучить код FileManager и почитать в интрнете по всем не знакомым словам информацию. Все что не сможете переварить - пишите в личку заранее.\n" +
-                    "        //                имплементировать deleteFile(), renameFile()\n" +
-                    "        //        СРЕДНЯЯ СЛОЖНОСТЬ\n" +
-                    "        //        сделать так что бы программа работала вечно и заканчивала свою работу только, если пользователь выберет 0. выход\n" +
-                    "        //        сделать так что бы можно было прололжить создавать файл, пока пользоваль не пожелает закончить эту операцию и перейти к следующей. Например, выбрали 1, создали файл, потом программа спрашивает - продолжить создавать файл или нет?\n" +
-                    "        //        ПОВЫШЕННАЯ СЛОЖНОСТЬ\n" +
-                    "        //        имплементировать методы findWordOccurrenceInFile(), replaceWordInFile(), showLineNumbersWhereWordWasFound()";
-            textToFile = fullPathToFile + "\n" + textToFile;
-
             if (!nameFile.equals("")) {
-                fullPathToFile = folderFile + File.separator + nameFile + ".txt";
+                fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
+                fileContent = fullPathToFile + lineSeparator + textToFile;
                 //File f = new File(fullPathToFile);
                 if (!fileExist(fullPathToFile)) {
                     //if (!f.exists()) {
                     try {
                         OutputStream outStream = new FileOutputStream(fullPathToFile);
-                        outStream.write(textToFile.getBytes());
+                        outStream.write(fileContent.getBytes());
                         outStream.close();
                         //f.createNewFile();  // код, который потенциально может вызвать исключение (исключительную ситуацию), если
                         //// у программы не будет прав на работу с файлом или директорией, которые вы указали.

@@ -40,11 +40,14 @@ public class Grep extends FileManager {
             word = FileManager.requestLine("input word to find");
 
         if (!nameFile.equals("")) {
-            fullPathToFile = folderFile + File.separator + nameFile + ".txt";
+            fullPathToFile = folderFile + nameFile + ".txt"; //+ File.separator
             count = findWordOccurrenceInFile(fullPathToFile, word);
         } else
             System.out.println("file does not exist: " + fullPathToFile);
 
         System.out.println("occurrences found words: " + count);
+        if (count > 0)
+            showLineNumbersWhereWordWasFound(fullPathToFile,word);
+
     }
 }
