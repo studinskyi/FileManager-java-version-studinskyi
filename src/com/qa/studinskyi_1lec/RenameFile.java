@@ -6,7 +6,7 @@ public class RenameFile extends FileManager {
     @Override
     public String getName() {
         //"mv - rename file";
-        return "rename file";
+        return "rename file (mv \"name file source\" \"name file target\")";
     }
 
     @Override
@@ -18,7 +18,7 @@ public class RenameFile extends FileManager {
         String fullPathToTargetFile = "";
 
         // проверка наличия введенного параметра имени исходного файла
-        if (FileManager.commandParameters.size() > 1) {
+        if (FileManager.commandParameters.size() > 0) {
             try {
                 nameSourceFile = FileManager.commandParameters.get(1);
             } catch (Exception e) {
@@ -27,7 +27,7 @@ public class RenameFile extends FileManager {
         }
 
         // проверка наличия введенного параметра нового имени файла
-        if (FileManager.commandParameters.size() > 2) {
+        if (FileManager.commandParameters.size() > 1) {
             try {
                 nameTargetFile = FileManager.commandParameters.get(2);
             } catch (Exception e) {
@@ -39,7 +39,7 @@ public class RenameFile extends FileManager {
             nameSourceFile = FileManager.requestLine("enter the name of the file to rename:");
 
         if (!nameSourceFile.equals("")) {
-            fullPathToSourceFile = folderFile + nameSourceFile + ".txt";
+            fullPathToSourceFile = folderFile + File.separator + nameSourceFile + ".txt";
             File fileSource = new File(fullPathToSourceFile);
             //if (fileExist(fullPathToSourceFile)) {
             if (fileSource.exists()) {
@@ -47,7 +47,7 @@ public class RenameFile extends FileManager {
                     nameTargetFile = FileManager.requestLine("enter the new name of the file:");
 
                 if (!nameTargetFile.equals("")) {
-                    fullPathToTargetFile = folderFile + nameTargetFile + ".txt";
+                    fullPathToTargetFile = folderFile + File.separator + nameTargetFile + ".txt";
                     File fileWithNewName = new File(fullPathToTargetFile);
                     if (!fileWithNewName.exists()) {
                         if (fileSource.renameTo(fileWithNewName))

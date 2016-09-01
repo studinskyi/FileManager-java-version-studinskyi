@@ -1,12 +1,14 @@
 package com.qa.studinskyi_1lec;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Menu {
 
-    public Map<String, FileManager> menuItems = new TreeMap<>();
+    public LinkedHashMap<String, FileManager> menuItems = new LinkedHashMap<>();
+   // public Map<String, FileManager> menuItems = new TreeMap<>();
 
     public Menu() {
         menuItems.put("ls", new ListFiles());
@@ -16,6 +18,7 @@ public class Menu {
         menuItems.put("cat", new ShowFile());
         menuItems.put("pwd", new CurrentDirectory());
         menuItems.put("grep", new Grep());
+        menuItems.put("sed", new Sed());
         menuItems.put("history", new History());
         menuItems.put("help", new Help());
     }

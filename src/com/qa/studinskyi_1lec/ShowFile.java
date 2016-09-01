@@ -7,7 +7,7 @@ public class ShowFile extends FileManager {
     @Override
     public String getName() {
         // "cat - show file"
-        return "show file";
+        return "show file (cat \"name file\")";
     }
 
     @Override

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class FileManager {
     public static String folderFile;
@@ -108,7 +110,68 @@ public abstract class FileManager {
         //        }
     }
 
-    public boolean fileExist(String fullPathToFile) {
+    public static int findWordOccurrenceInFile(String fullPathToFile, String word) {
+        int count = 0;
+
+        if (fileExist(fullPathToFile)) {
+            //if (f.exists()) {
+            Pattern pattern = Pattern.compile(word);
+            String fileContent = "";
+            try {
+                fileContent = readFile(fullPathToFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Matcher matcher = pattern.matcher(fileContent);
+            int pos = 0;
+
+            while (matcher.find(pos)) {
+                count++;
+                pos = matcher.start() + 1;
+            }
+        } else
+            System.out.println("file does not exist: " + fullPathToFile);
+
+        return count;
+    }
+
+    public void replaceWordInFile(String fullPathToFile, String wordSource, String wordTarget) {
+        String textToFile = "";
+
+        if (fileExist(fullPathToFile)) {
+            //if (f.exists()) {
+            Pattern pattern = Pattern.compile(wordSource);
+            String fileContent = "";
+            try {
+                fileContent = readFile(fullPathToFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Matcher matcher = pattern.matcher(fileContent);
+            textToFile = matcher.replaceAll(wordTarget);
+            //replaceAll(String regex, String replacement)
+            //        Matcher m = Pattern.compile("http://(.*?)/|$").matcher(url);
+            //        if (m.find()) {
+            //            String domain = m.group(0);
+            //            stats.put(domain, stats.containsKey(domain) ? stats.get(domain) + 1 : 1);
+            //        } else {
+            //            System.out.println("Cant extract domain from " + url);
+            //        }
+
+            System.out.println(textToFile);
+
+            // int pos = 0;
+            //            while (matcher.find(pos)) {
+            //                count++;
+            //                pos = matcher.start() + 1;
+            //            }
+
+
+        } else
+            System.out.println("file does not exist: " + fullPathToFile);
+    }
+
+    public static boolean fileExist(String fullPathToFile) {
         // 'Path' used to locate a file in a file system. It will
         // typically represent a system dependent file path.
         Path path = Paths.get(fullPathToFile);

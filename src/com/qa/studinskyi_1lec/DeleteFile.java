@@ -1,13 +1,12 @@
 package com.qa.studinskyi_1lec;
 
 import java.io.File;
-import java.io.IOException;
 
 public class DeleteFile extends FileManager {
     @Override
     public String getName() {
         // "rm - delete file"
-        return "delete file";
+        return "delete file (rm \"name file\")";
     }
 
     @Override
@@ -16,7 +15,7 @@ public class DeleteFile extends FileManager {
         String nameFile = "";
 
         // проверка наличия введенного параметра имени файла
-        if (FileManager.commandParameters.size() > 1) {
+        if (FileManager.commandParameters.size() > 0) {
             try {
                 nameFile = FileManager.commandParameters.get(1);
             } catch (Exception e) {
@@ -35,7 +34,7 @@ public class DeleteFile extends FileManager {
             }
 
             if (!nameFile.equals("")) {
-                fullPathToFile = folderFile + nameFile + ".txt";
+                fullPathToFile = folderFile + File.separator + nameFile + ".txt";
                 if (fileExist(fullPathToFile)) {
                     //if (f.exists()) {
                     System.out.println("file is deleted: " + fullPathToFile);

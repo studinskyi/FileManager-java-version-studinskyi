@@ -1,5 +1,6 @@
 package com.qa.studinskyi_1lec;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,7 +9,7 @@ public class CreateFile extends FileManager {
     @Override
     public String getName() {
         // "touch - create file"
-        return "create file";
+        return "create file (touch \"name file\")";
     }
 
     @Override
@@ -18,7 +19,7 @@ public class CreateFile extends FileManager {
         String textToFile = "";
 
         // проверка наличия введенного параметра имени файла
-        if (FileManager.commandParameters.size() > 1) {
+        if (FileManager.commandParameters.size() > 0) {
             try {
                 nameFile = FileManager.commandParameters.get(1);
             } catch (Exception e) {
@@ -48,7 +49,7 @@ public class CreateFile extends FileManager {
             textToFile = fullPathToFile + "\n" + textToFile;
 
             if (!nameFile.equals("")) {
-                fullPathToFile = folderFile + nameFile + ".txt";
+                fullPathToFile = folderFile + File.separator + nameFile + ".txt";
                 //File f = new File(fullPathToFile);
                 if (!fileExist(fullPathToFile)) {
                     //if (!f.exists()) {
