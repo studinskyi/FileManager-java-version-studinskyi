@@ -37,7 +37,7 @@ public abstract class FileManager {
         return answer;
     }
 
-    public static void setFolderFile(String fullPathDirectory) {
+    public static void setWorkFolder(String fullPathDirectory) {
         if (fullPathDirectory.equals(""))
             fullPathDirectory = "c:\\test_QA\\";
 

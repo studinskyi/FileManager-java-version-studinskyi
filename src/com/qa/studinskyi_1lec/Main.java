@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FileManager.setFolderFile("c:\\test_QA\\");
+        FileManager.setWorkFolder("c:\\test_QA\\");
         FileManager.menu.runMenu();
         FileManager.reader.close();
 
