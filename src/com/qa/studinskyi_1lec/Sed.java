@@ -60,12 +60,11 @@ public class Sed extends FileManager {
         } else
             System.out.println("file does not exist: " + fullPathToFile);
 
-        replaceWordInFile(fullPathToFile,wordSource,wordTarget);
+        replaceWordInFile(fullPathToFile, wordSource, wordTarget);
 
         System.out.println("строка поиска: " + wordSource);
         System.out.println("строка замены: " + wordTarget);
         System.out.println("occurrences found words: " + count);
-
 
 
     }

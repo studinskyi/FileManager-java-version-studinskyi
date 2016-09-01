@@ -9,7 +9,9 @@ public class Menu {
    // public Map<String, FileManager> menuItems = new TreeMap<>();
 
     public Menu() {
+        menuItems.put("help", new Help());
         menuItems.put("ls", new ListFiles());
+        menuItems.put("cd", new ChangeDirectory());
         menuItems.put("mkdir", new CreateDirectory());
         menuItems.put("touch", new CreateFile());
         menuItems.put("rm", new DeleteFile());
@@ -19,7 +21,6 @@ public class Menu {
         menuItems.put("grep", new Grep());
         menuItems.put("sed", new Sed());
         menuItems.put("history", new History());
-        menuItems.put("help", new Help());
     }
 
     public void printMenu() {

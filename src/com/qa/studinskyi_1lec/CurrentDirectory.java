@@ -1,6 +1,6 @@
 package com.qa.studinskyi_1lec;
 
-public class CurrentDirectory extends FileManager{
+public class CurrentDirectory extends FileManager {
     @Override
     public String getName() {
         // "pwd - current directory"

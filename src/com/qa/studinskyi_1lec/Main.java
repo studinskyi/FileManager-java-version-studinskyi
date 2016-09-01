@@ -1,6 +1,7 @@
 package com.qa.studinskyi_1lec;
 
 import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         FileManager.setFolderFile("c:\\test_QA\\");

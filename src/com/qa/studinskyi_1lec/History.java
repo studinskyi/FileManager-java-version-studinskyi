@@ -2,7 +2,7 @@ package com.qa.studinskyi_1lec;
 
 import java.util.Map;
 
-public class History extends FileManager{
+public class History extends FileManager {
     @Override
     public String getName() {
         // "history - command line history"

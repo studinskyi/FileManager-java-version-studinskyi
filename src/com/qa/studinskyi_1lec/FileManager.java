@@ -53,11 +53,11 @@ public abstract class FileManager {
         // для возможности последующего просмотра командой history
         Date d = new Date();
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        executedOperations.put(formatDate.format(d),currentCommand);
+        executedOperations.put(formatDate.format(d), currentCommand);
     }
 
     private static String[] parsingCommanLine(String strCommand) {
-        String oneSpace  = " ";
+        String oneSpace = " ";
         String twoSpaces = "  ";
         // свертка пробелов в строке команды, введенной с клавиатуры
         while (strCommand.indexOf(twoSpaces) >= 0) {
@@ -74,15 +74,15 @@ public abstract class FileManager {
     }
 
     public static void setFolderFile(String fullPathDirectory) {
-        if(fullPathDirectory.equals(""))
+        if (fullPathDirectory.equals(""))
             fullPathDirectory = "c:\\test_QA\\";
 
         File fDirectory = new File(fullPathDirectory);
-        if(!fDirectory.exists()) {
+        if (!fDirectory.exists()) {
             //myPath.mkdir();  //выбросит исключение, если родительского каталога нет в файловой системе
             fDirectory.mkdirs();  // создаст и всю цепочку каталгов если их нет.
             // проверка наличия созданной директории
-            if(fDirectory.exists())
+            if (fDirectory.exists())
                 FileManager.folderFile = fullPathDirectory;
                 //System.out.println("directory was created: " + fullPathDirectory);
             else

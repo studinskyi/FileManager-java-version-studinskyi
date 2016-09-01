@@ -2,7 +2,7 @@ package com.qa.studinskyi_1lec;
 
 import java.io.File;
 
-public class CreateDirectory extends FileManager{
+public class CreateDirectory extends FileManager {
     @Override
     public String getName() {
         // "mkdir - create directory"
@@ -28,22 +28,22 @@ public class CreateDirectory extends FileManager{
             nameDirectory = FileManager.requestLine("input name directory");
 
         // приведение пути к новому каталогу в нормальное состояние
-        fullPathDirectory = folderFile + FileSeparated + nameDirectory + FileSeparated;
-        String badSlash =  (!FileSeparated.equals("/"))? "/": "\\";
+        fullPathDirectory = FileManager.folderFile + FileSeparated + nameDirectory + FileSeparated;
+        String badSlash = (!FileSeparated.equals("/")) ? "/" : "\\";
         while (fullPathDirectory.indexOf(badSlash) >= 0) {
             String replace = fullPathDirectory.replace(badSlash, FileSeparated);
             fullPathDirectory = replace;
         }
-        while(fullPathDirectory.contains(FileSeparated+FileSeparated)) {
-            String replace = fullPathDirectory.replace(FileSeparated+FileSeparated,FileSeparated);
+        while (fullPathDirectory.contains(FileSeparated + FileSeparated)) {
+            String replace = fullPathDirectory.replace(FileSeparated + FileSeparated, FileSeparated);
             fullPathDirectory = replace;
         }
         File fDirectory = new File(fullPathDirectory);
-        if(!fDirectory.exists()) {
+        if (!fDirectory.exists()) {
             //myPath.mkdir();  //выбросит исключение, если родительского каталога нет в файловой системе
             fDirectory.mkdirs();  // создаст и всю цепочку каталгов если их нет.
             // проверка наличия созданной директории
-            if(fDirectory.exists())
+            if (fDirectory.exists())
                 System.out.println("directory was created: " + fullPathDirectory);
             else
                 System.out.println("directory did not created: " + fullPathDirectory);

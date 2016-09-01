@@ -47,7 +47,7 @@ public class Grep extends FileManager {
 
         System.out.println("occurrences found words: " + count);
         if (count > 0)
-            showLineNumbersWhereWordWasFound(fullPathToFile,word);
+            showLineNumbersWhereWordWasFound(fullPathToFile, word);
 
     }
 }

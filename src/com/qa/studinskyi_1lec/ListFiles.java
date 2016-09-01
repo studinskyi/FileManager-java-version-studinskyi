@@ -2,12 +2,13 @@ package com.qa.studinskyi_1lec;
 
 import java.io.File;
 
-public class ListFiles extends FileManager{
+public class ListFiles extends FileManager {
     @Override
     public String getName() {
         // "ls - list files and catalogs";
         return "list files and catalogs";
     }
+
     @Override
     public void execute() {
         System.out.println("list of files and directories:");
