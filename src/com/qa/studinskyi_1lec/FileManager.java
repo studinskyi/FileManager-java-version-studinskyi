@@ -5,11 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,39 +35,6 @@ public abstract class FileManager {
             answer = "";
         }
         return answer;
-    }
-
-    public static void readCommand() throws IOException {
-        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
-        currentCommand = FileManager.requestLine("enter the command:");
-        String[] massCommand = parsingCommanLine(currentCommand);
-        // обновление списка проанализированных параметров из введенной команды
-        FileManager.commandParameters.clear();
-        for (String tekStr : massCommand)
-            FileManager.commandParameters.add(tekStr);
-
-        // занесение текущей введенной команды в список,
-        // для возможности последующего просмотра командой history
-        Date d = new Date();
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        executedOperations.put(formatDate.format(d), currentCommand);
-    }
-
-    private static String[] parsingCommanLine(String strCommand) {
-        String oneSpace = " ";
-        String twoSpaces = "  ";
-        // свертка пробелов в строке команды, введенной с клавиатуры
-        while (strCommand.indexOf(twoSpaces) >= 0) {
-            String replace = strCommand.replace(twoSpaces, oneSpace);
-            strCommand = replace;
-        }
-        //        while(strCommand.contains("  ")) {
-        //            String replace = strCommand.replace("  ", " ");
-        //            strCommand = replace;
-        //        }
-        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
-        String[] massStr = strCommand.split(" ");
-        return massStr;
     }
 
     public static void setFolderFile(String fullPathDirectory) {

@@ -1,8 +1,12 @@
 package com.qa.studinskyi_1lec;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.qa.studinskyi_1lec.FileManager.currentCommand;
 
 public class Menu {
     public LinkedHashMap<String, FileManager> menuItems = new LinkedHashMap<>();
@@ -33,7 +37,7 @@ public class Menu {
     public void runMenu() throws IOException {
         printMenu();
         while (true) {
-            FileManager.readCommand();
+            readCommand();
             if (FileManager.commandParameters.get(0).equals("exit")) {
                 String answer = FileManager.requestLine("Exit the program now? y\\n");
                 if (answer.equals("y")) {
@@ -50,5 +54,38 @@ public class Menu {
                 menuItems.get(FileManager.commandParameters.get(0)).execute();
             }
         }
+    }
+
+    private void readCommand() throws IOException {
+        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
+        currentCommand = FileManager.requestLine("enter the command:");
+        String[] massCommand = parsingCommanLine(currentCommand);
+        // обновление списка проанализированных параметров из введенной команды
+        FileManager.commandParameters.clear();
+        for (String tekStr : massCommand)
+            FileManager.commandParameters.add(tekStr);
+
+        // занесение текущей введенной команды в список,
+        // для возможности последующего просмотра командой history
+        Date d = new Date();
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        FileManager.executedOperations.put(formatDate.format(d), currentCommand);
+    }
+
+    private String[] parsingCommanLine(String strCommand) {
+        String oneSpace = " ";
+        String twoSpaces = "  ";
+        // свертка пробелов в строке команды, введенной с клавиатуры
+        while (strCommand.indexOf(twoSpaces) >= 0) {
+            String replace = strCommand.replace(twoSpaces, oneSpace);
+            strCommand = replace;
+        }
+        //        while(strCommand.contains("  ")) {
+        //            String replace = strCommand.replace("  ", " ");
+        //            strCommand = replace;
+        //        }
+        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
+        String[] massStr = strCommand.split(" ");
+        return massStr;
     }
 }
