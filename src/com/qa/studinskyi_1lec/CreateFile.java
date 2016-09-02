@@ -70,8 +70,8 @@ public class CreateFile extends FileManager {
                         OutputStream outStream = new FileOutputStream(fullPathToFile);
                         outStream.write(fileContent.getBytes());
                         outStream.close();
+                        System.out.println("file was created: " + fullPathToFile);
                         //f.createNewFile();  // код, который потенциально может вызвать исключение (исключительную ситуацию), если
-                        //// у программы не будет прав на работу с файлом или директорией, которые вы указали.
                     } catch (IOException e) {
                         System.out.println("did not created file: " + fullPathToFile);
                     }
@@ -90,7 +90,6 @@ public class CreateFile extends FileManager {
             //        } catch (IOException e) {
             //            e.printStackTrace(); // код, который выполниться, если возникнет исклбчительная ситуация
             //        }
-            System.out.println("создание файла " + fullPathToFile);
             nameFile = "";
         }
 

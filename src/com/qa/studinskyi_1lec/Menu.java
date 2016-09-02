@@ -31,7 +31,7 @@ public class Menu {
         System.out.println("File manager menu:");
         System.out.println("exit - exit from the program");
         for (Map.Entry<String, FileManager> entry : menuItems.entrySet())
-            System.out.println(entry.getKey() + " - " + entry.getValue().getName());
+            System.out.println(entry.getKey() + " \t- " + entry.getValue().getName());
     }
 
     public void runMenu() throws IOException {
@@ -75,16 +75,25 @@ public class Menu {
     private String[] parsingCommanLine(String strCommand) {
         String oneSpace = " ";
         String twoSpaces = "  ";
+        String strRepl = "";
+
+        while (strCommand.indexOf("\"") >= 0 || strCommand.indexOf("\'") >= 0) {
+            strRepl = strCommand.replace("\"","");
+            strCommand = strRepl.replace("\'","");
+            //answer = replace;
+        }
         // свертка пробелов в строке команды, введенной с клавиатуры
         while (strCommand.indexOf(twoSpaces) >= 0) {
-            String replace = strCommand.replace(twoSpaces, oneSpace);
-            strCommand = replace;
+            strRepl = strCommand.replace(twoSpaces, oneSpace);
+            strCommand = strRepl;
         }
         //        while(strCommand.contains("  ")) {
         //            String replace = strCommand.replace("  ", " ");
         //            strCommand = replace;
         //        }
         // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
+        // удаление символа кавычек и апострофа из введенной с клавиатуры строки
+
         String[] massStr = strCommand.split(" ");
         return massStr;
     }

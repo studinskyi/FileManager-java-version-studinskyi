@@ -28,12 +28,29 @@ public abstract class FileManager {
 
     public static String requestLine(String textMessage) {
         String answer = "";
+        String oneSpace = " ";
+        String twoSpaces = "  ";
+        String strRepl = "";
+
         try {
             System.out.println(textMessage);
             answer = reader.readLine();
         } catch (IOException e) {
             answer = "";
         }
+
+        // удаление символа кавычек и апострофа из введенной с клавиатуры строки
+        while (answer.indexOf("\"") >= 0 || answer.indexOf("\'") >= 0) {
+            strRepl = answer.replace("\"","");
+            answer = strRepl.replace("\'","");
+            //answer = replace;
+        }
+        // свертка пробелов в строке команды, введенной с клавиатуры
+        while (answer.indexOf(twoSpaces) >= 0) {
+            strRepl = answer.replace(twoSpaces, oneSpace);
+            answer = strRepl;
+        }
+
         return answer;
     }
 
