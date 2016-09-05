@@ -40,6 +40,15 @@ public class DeleteFile extends FileManager {
                     System.out.println("file is deleted: " + fullPathToFile);
                     File f = new File(fullPathToFile);
                     f.delete();
+
+                    if (fileExist(fullPathToFile)) {
+                        try {
+                            throw new ExceptionFileNotDeleted("Fil has not been deleted:" + fullPathToFile);
+                        } catch (ExceptionFileNotDeleted e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                 } else
                     System.out.println("file does not exist, it can not be deleted: " + fullPathToFile);
             }
