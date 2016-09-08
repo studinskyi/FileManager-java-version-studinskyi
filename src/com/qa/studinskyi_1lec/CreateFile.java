@@ -70,7 +70,16 @@ public class CreateFile extends FileManager {
                         OutputStream outStream = new FileOutputStream(fullPathToFile);
                         outStream.write(fileContent.getBytes());
                         outStream.close();
-                        System.out.println("file was created: " + fullPathToFile);
+
+                        if (!fileExist(fullPathToFile)) {
+                            try {
+                                throw new ExceptionFileNotDeleted("File was not created:" + fullPathToFile);
+                            } catch (ExceptionFileNotDeleted e) {
+                                e.printStackTrace();
+                            }
+                        } else
+                            System.out.println("file was created: " + fullPathToFile);
+
                         //f.createNewFile();  // код, который потенциально может вызвать исключение (исключительную ситуацию), если
                     } catch (IOException e) {
                         System.out.println("did not created file: " + fullPathToFile);

@@ -59,7 +59,7 @@ public class Menu {
     private void readCommand() throws IOException {
         // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
         currentCommand = FileManager.requestLine("enter the command:");
-        String[] massCommand = parsingCommanLine(currentCommand);
+        String[] massCommand = parsingCommandLine(currentCommand);
         // обновление списка проанализированных параметров из введенной команды
         FileManager.commandParameters.clear();
         for (String tekStr : massCommand)
@@ -72,7 +72,7 @@ public class Menu {
         FileManager.executedOperations.put(formatDate.format(d), currentCommand);
     }
 
-    private String[] parsingCommanLine(String strCommand) {
+    private String[] parsingCommandLine(String strCommand) {
         String oneSpace = " ";
         String twoSpaces = "  ";
         String strRepl = "";

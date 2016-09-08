@@ -43,7 +43,7 @@ public class DeleteFile extends FileManager {
 
                     if (fileExist(fullPathToFile)) {
                         try {
-                            throw new ExceptionFileNotDeleted("Fil has not been deleted:" + fullPathToFile);
+                            throw new ExceptionFileNotDeleted("File has not been deleted:" + fullPathToFile);
                         } catch (ExceptionFileNotDeleted e) {
                             e.printStackTrace();
                         }
