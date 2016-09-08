@@ -39,6 +39,26 @@ public class DeleteFile extends FileManager {
                     //if (f.exists()) {
                     System.out.println("file is deleted: " + fullPathToFile);
                     File f = new File(fullPathToFile);
+                    //                    file.setReadOnly();//mark this file as read only, since jdk 1.2
+                    //                    if(file.canWrite()){
+                    //                        System.out.println("This file is writable");
+                    //                    }else{
+                    //                        System.out.println("This file is read only");
+                    //                    }
+                    //                    file.setWritable(true);//revert the operation, mark this file as writable, since jdk 1.6
+                    //                    if(file.canWrite()){
+                    //                        System.out.println("This file is writable");
+                    //                    }else{
+                    //                        System.out.println("This file is read only");
+                    //                    }
+                    if (!f.canWrite()) {
+                        try {
+                            throw new ExceptionFileIsReadOnly("This file is read only: " + fullPathToFile);
+                        } catch (ExceptionFileIsReadOnly e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     f.delete();
 
                     if (fileExist(fullPathToFile)) {
