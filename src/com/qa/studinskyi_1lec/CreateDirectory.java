@@ -43,12 +43,18 @@ public class CreateDirectory extends FileManager {
             //myPath.mkdir();  //выбросит исключение, если родительского каталога нет в файловой системе
             fDirectory.mkdirs();  // создаст и всю цепочку каталгов если их нет.
             // проверка наличия созданной директории
-            if (fDirectory.exists())
-                System.out.println("directory was created: " + fullPathDirectory);
-            else
-                System.out.println("directory did not created: " + fullPathDirectory);
+            if (!fDirectory.exists()) {
+                try {
+                    // System.out.println("Directory did not created: " + fullPathDirectory);
+                    throw new ExceptionDirectoryNotCreated("File was not created:" + fullPathDirectory);
+                } catch (ExceptionDirectoryNotCreated e) {
+                    e.printStackTrace();
+                }
+            } else
+                System.out.println("Directory was created: " + fullPathDirectory);
+
         } else
-            System.out.println("directory is already exists: " + fullPathDirectory);
+            System.out.println("Directory is already exists: " + fullPathDirectory);
 
     }
 }

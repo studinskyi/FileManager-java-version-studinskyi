@@ -72,6 +72,9 @@ public class DeleteFile extends FileManager {
                 } else
                     System.out.println("file does not exist, it can not be deleted: " + fullPathToFile);
             }
+            if (!repeatCommand)
+                break;
+
             nameFile = "";
         }
 

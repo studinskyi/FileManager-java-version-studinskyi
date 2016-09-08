@@ -17,6 +17,7 @@ public abstract class FileManager {
     public static ArrayList<String> commandParameters = new ArrayList<>();
     public static LinkedHashMap<String, String> executedOperations = new LinkedHashMap<>();
     public static Menu menu = new Menu();
+    public static boolean repeatCommand = true; // необходимость выполнения
 
     public FileManager() {
         reader = new BufferedReader(new InputStreamReader(System.in));
@@ -100,6 +101,18 @@ public abstract class FileManager {
         }
 
         return textOfFile;
+        //        try {
+        //            BufferedReader reader = new BufferedReader(new FileReader(fullPathToFile));
+        //            String strLine = "";
+        //            while ((strLine = reader.readLine()) != null)
+        //                lines.add(strLine);
+        //            reader.close();
+        //        } catch (FileNotFoundException e) {
+        //            e.printStackTrace();
+        //        } catch (IOException e) {
+        //            e.printStackTrace();
+        //        }
+        //===================== 2 вариант
         //        File file = new File(fullPathToFile);
         //        StringBuilder fileContents = new StringBuilder((int) file.length());
         //        Scanner scanner = new Scanner(file);
@@ -114,7 +127,7 @@ public abstract class FileManager {
         //            scanner.close();
         //        }
 
-        //===================== 2 вариант
+        //===================== 3 вариант
         //        List<String> list = new ArrayList<String>();
         //        String line = "";
         //        Scanner in = new Scanner(new File(fullPathToFile));
@@ -124,7 +137,7 @@ public abstract class FileManager {
         //            System.out.println(line);
         //        }
         //        //String[] array = list.toArray(new String[0]);
-        //============== 3 вариант
+        //============== 4 вариант
         //        BufferedReader reader = new BufferedReader(new FileReader(fullPathToFile));
         //        String line;
         //        List<String> lines = new ArrayList<String>();
@@ -158,6 +171,40 @@ public abstract class FileManager {
 
         return count;
     }
+
+    public static String[] parsingCommandLine(String strCommand) {
+        String oneSpace = " ";
+        String twoSpaces = "  ";
+        String strRepl = "";
+
+        while (strCommand.indexOf("\"") >= 0 || strCommand.indexOf("\'") >= 0) {
+            strRepl = strCommand.replace("\"","");
+            strCommand = strRepl.replace("\'","");
+            //answer = replace;
+        }
+        // свертка пробелов в строке команды, введенной с клавиатуры
+        while (strCommand.indexOf(twoSpaces) >= 0) {
+            strRepl = strCommand.replace(twoSpaces, oneSpace);
+            strCommand = strRepl;
+        }
+        //        while(strCommand.contains("  ")) {
+        //            String replace = strCommand.replace("  ", " ");
+        //            strCommand = replace;
+        //        }
+        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
+        // удаление символа кавычек и апострофа из введенной с клавиатуры строки
+
+        String[] massStr = strCommand.split(" ");
+        return massStr;
+    }
+
+    public static void updateCommandOption(String[] massCommand) {
+        // обновление списка проанализированных параметров из введенной команды
+        FileManager.commandParameters.clear();
+        for (String tekStr : massCommand)
+            FileManager.commandParameters.add(tekStr);
+    }
+
 
     public static void replaceWordInFile(String fullPathToFile, String wordSource, String wordTarget) {
         String textToFile = "";

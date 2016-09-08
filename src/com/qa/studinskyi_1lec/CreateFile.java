@@ -1,5 +1,7 @@
 package com.qa.studinskyi_1lec;
 
+import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -99,7 +101,11 @@ public class CreateFile extends FileManager {
             //        } catch (IOException e) {
             //            e.printStackTrace(); // код, который выполниться, если возникнет исклбчительная ситуация
             //        }
+            if (!repeatCommand)
+                break;
+
             nameFile = "";
+
         }
 
     }

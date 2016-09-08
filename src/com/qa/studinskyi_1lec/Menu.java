@@ -59,42 +59,17 @@ public class Menu {
     private void readCommand() throws IOException {
         // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
         currentCommand = FileManager.requestLine("enter the command:");
-        String[] massCommand = parsingCommandLine(currentCommand);
+        String[] massCommand = FileManager.parsingCommandLine(currentCommand);
+        FileManager.updateCommandOption(massCommand);
         // обновление списка проанализированных параметров из введенной команды
-        FileManager.commandParameters.clear();
-        for (String tekStr : massCommand)
-            FileManager.commandParameters.add(tekStr);
+        //        FileManager.commandParameters.clear();
+        //        for (String tekStr : massCommand)
+        //            FileManager.commandParameters.add(tekStr);
 
         // занесение текущей введенной команды в список,
         // для возможности последующего просмотра командой history
         Date d = new Date();
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         FileManager.executedOperations.put(formatDate.format(d), currentCommand);
-    }
-
-    private String[] parsingCommandLine(String strCommand) {
-        String oneSpace = " ";
-        String twoSpaces = "  ";
-        String strRepl = "";
-
-        while (strCommand.indexOf("\"") >= 0 || strCommand.indexOf("\'") >= 0) {
-            strRepl = strCommand.replace("\"","");
-            strCommand = strRepl.replace("\'","");
-            //answer = replace;
-        }
-        // свертка пробелов в строке команды, введенной с клавиатуры
-        while (strCommand.indexOf(twoSpaces) >= 0) {
-            strRepl = strCommand.replace(twoSpaces, oneSpace);
-            strCommand = strRepl;
-        }
-        //        while(strCommand.contains("  ")) {
-        //            String replace = strCommand.replace("  ", " ");
-        //            strCommand = replace;
-        //        }
-        // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
-        // удаление символа кавычек и апострофа из введенной с клавиатуры строки
-
-        String[] massStr = strCommand.split(" ");
-        return massStr;
     }
 }
