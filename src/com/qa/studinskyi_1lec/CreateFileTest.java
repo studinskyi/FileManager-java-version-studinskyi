@@ -47,6 +47,34 @@ public class CreateFileTest {
         System.out.println("Test сreateFilePositiveTest() end");
     }
 
+    @Test(enabled = true)
+    public void сreateFileNegativeTest() {
+        // задаю несуществующий путь к текущему каталогу
+        //FileManager.setWorkFolder("test_11111111");
+        System.out.println("Test сreateFileNegativeTest() start");
+        // инициализация параметров файлового менеджера при создании файла
+        //String currentCommand = "touch test123";
+        String currentCommand = "touch";
+        FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
+        // проверка создания тестового файла и реального результата
+        puthToFile = FileManager.folderFile + "test123.txt";
+        File file = new File(puthToFile);
+        System.out.println("File exist: " + file.exists());
+        // попытка создать файл
+        CreateFile classCreateFile = new CreateFile();
+        classCreateFile.execute();
+        System.out.println("File exist: " + file.exists());
+        assertTrue(file.exists());
+
+            //        // удаление созданного при тестировании файла
+            //        currentCommand = "rm test123";
+            //        FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
+            //        DeleteFile classDeleteFile = new DeleteFile();
+            //        classDeleteFile.execute();
+
+        System.out.println("Test сreateFileNegativeTest() end");
+    }
+
     @AfterTest
     public void tearDown() {
         // подчищаем за собой энвайронмент
