@@ -58,7 +58,7 @@ public class Menu {
 
     private void readCommand() throws IOException {
         // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
-        currentCommand = FileManager.requestLine("enter the command:");
+        FileManager.currentCommand = FileManager.requestLine("enter the command:");
         String[] massCommand = FileManager.parsingCommandLine(currentCommand);
         FileManager.updateCommandOption(massCommand);
         // обновление списка проанализированных параметров из введенной команды
