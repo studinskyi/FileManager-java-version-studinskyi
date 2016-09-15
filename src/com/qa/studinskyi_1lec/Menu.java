@@ -59,7 +59,7 @@ public class Menu {
     private void readCommand() throws IOException {
         // преобразование строки в массив подстрок, используя в качестве разделителя пробел " "
         FileManager.currentCommand = FileManager.requestLine("enter the command:");
-        String[] massCommand = FileManager.parsingCommandLine(currentCommand);
+        String[] massCommand = FileManager.parsingCommandLine(FileManager.currentCommand);
         FileManager.updateCommandOption(massCommand);
         // обновление списка проанализированных параметров из введенной команды
         //        FileManager.commandParameters.clear();
@@ -70,6 +70,6 @@ public class Menu {
         // для возможности последующего просмотра командой history
         Date d = new Date();
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        FileManager.executedOperations.put(formatDate.format(d), currentCommand);
+        FileManager.executedOperations.put(formatDate.format(d), FileManager.currentCommand);
     }
 }
