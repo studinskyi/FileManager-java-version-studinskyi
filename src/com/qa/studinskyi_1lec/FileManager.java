@@ -18,7 +18,7 @@ public abstract class FileManager {
     public static LinkedHashMap<String, String> executedOperations = new LinkedHashMap<>();
     public static Menu menu = new Menu();
     public static boolean repeatCommand = true; // необходимость выполнения
-    public static boolean interactivCommand = true; // режим интерактивного режима выполнения команд (то есть )
+    public static boolean interactivCommand = true; // режим интерактивности процесса выполнения команды (то есть будет запрашивать ввод имени файла или каталога при их отсутствии в переданных параметрах)
 
     public FileManager() {
         reader = new BufferedReader(new InputStreamReader(System.in));

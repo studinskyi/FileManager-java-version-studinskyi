@@ -24,12 +24,14 @@ public class DeleteFile extends FileManager {
         }
 
         while (true) {
-            if (nameFile.equals("")) {
+            if (nameFile.equals("") && FileManager.interactivCommand) {
                 String answer = FileManager.requestLine("Delete file? y\\n");
                 if (!answer.equals("y")) {
                     System.out.println("file deletion is canceled");
                     break;
                 }
+
+                //if (FileManager.interactivCommand) // только если включен режим интерактивности процесса выполнения команды
                 nameFile = FileManager.requestLine("enter the name of the file to delete:");
             }
 

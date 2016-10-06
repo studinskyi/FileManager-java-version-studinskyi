@@ -25,7 +25,7 @@ public class ShowFile extends FileManager {
             }
         }
 
-        if (nameFile.equals(""))
+        if (nameFile.equals("") && FileManager.interactivCommand)
             nameFile = FileManager.requestLine("input name of file");
 
         if (!nameFile.equals(""))

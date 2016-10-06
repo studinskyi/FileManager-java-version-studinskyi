@@ -29,7 +29,7 @@ public class Sed extends FileManager {
                 nameFile = "";
             }
         }
-        if (nameFile.equals(""))
+        if (nameFile.equals("") && FileManager.interactivCommand)
             nameFile = FileManager.requestLine("input name of file ");
 
         // проверка наличия введенного слова для поиска
@@ -40,7 +40,7 @@ public class Sed extends FileManager {
                 wordSource = "";
             }
         }
-        if (wordSource.equals(""))
+        if (wordSource.equals("") && FileManager.interactivCommand)
             wordSource = FileManager.requestLine("input word to find");
 
         // проверка наличия введенного слова для замены
@@ -51,7 +51,7 @@ public class Sed extends FileManager {
                 wordTarget = "";
             }
         }
-        if (wordTarget.equals(""))
+        if (wordTarget.equals("") && FileManager.interactivCommand)
             wordTarget = FileManager.requestLine("input word to replace");
 
         if (!nameFile.equals("")) {

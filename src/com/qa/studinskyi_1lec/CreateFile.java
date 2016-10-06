@@ -53,12 +53,14 @@ public class CreateFile extends FileManager {
                     " //        имплементировать методы findWordOccurrenceInFile(), replaceWordInFile(), showLineNumbersWhereWordWasFound()" + lineSeparator;
 
         while (true) {
-            if (nameFile.equals("")) {
+            if (nameFile.equals("") && FileManager.interactivCommand) {
                 String answer = FileManager.requestLine("Create new file? y\\n");
                 if (!answer.equals("y")) {
                     System.out.println("file creation is canceled");
                     break;
                 }
+
+                //if (FileManager.interactivCommand) // только если включен режим интерактивности процесса выполнения команды
                 nameFile = FileManager.requestLine("input name of new file ");
             }
 

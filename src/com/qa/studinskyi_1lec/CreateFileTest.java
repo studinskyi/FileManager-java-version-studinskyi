@@ -19,6 +19,7 @@ public class CreateFileTest {
         // инициализация параметров файлового менеджера
         FileManager.setWorkFolder("c:\\test_QA\\");
         FileManager.repeatCommand = false; // не выполнять запрос на создание следующего файла
+        FileManager.interactivCommand = false;
     }
 
 
@@ -26,7 +27,7 @@ public class CreateFileTest {
     public void сreateFilePositiveTest() {
         System.out.println("Test сreateFilePositiveTest() start");
         // инициализация параметров файлового менеджера при создании файла
-        String currentCommand = "touch test123";
+        String currentCommand = "touch test123"; // команда создания файла test123.txt
         FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
         // проверка создания тестового файла и реального результата
         puthToFile = FileManager.folderFile + "test123.txt";
@@ -54,7 +55,7 @@ public class CreateFileTest {
         System.out.println("Test сreateFileNegativeTest() start");
         // инициализация параметров файлового менеджера при создании файла
         //String currentCommand = "touch test123";
-        String currentCommand = "touch";
+        String currentCommand = "touch"; // команда создания файла без указания имени файла (для негативного теста)
         FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
         // проверка создания тестового файла и реального результата
         puthToFile = FileManager.folderFile + "test123.txt";
@@ -64,13 +65,7 @@ public class CreateFileTest {
         CreateFile classCreateFile = new CreateFile();
         classCreateFile.execute();
         System.out.println("File exist: " + file.exists());
-        assertTrue(file.exists());
-
-            //        // удаление созданного при тестировании файла
-            //        currentCommand = "rm test123";
-            //        FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
-            //        DeleteFile classDeleteFile = new DeleteFile();
-            //        classDeleteFile.execute();
+        assertTrue(!file.exists()); // негативный тест создания файла можно признать успешным когда файл не был создан при его выполнении
 
         System.out.println("Test сreateFileNegativeTest() end");
     }

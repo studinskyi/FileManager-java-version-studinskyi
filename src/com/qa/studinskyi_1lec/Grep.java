@@ -25,7 +25,7 @@ public class Grep extends FileManager {
                 nameFile = "";
             }
         }
-        if (nameFile.equals(""))
+        if (nameFile.equals("") && FileManager.interactivCommand)
             nameFile = FileManager.requestLine("input name of file ");
 
         // проверка наличия введенного слова для поиска

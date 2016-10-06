@@ -35,7 +35,7 @@ public class RenameFile extends FileManager {
             }
         }
 
-        if (nameSourceFile.equals(""))
+        if (nameSourceFile.equals("") && FileManager.interactivCommand)
             nameSourceFile = FileManager.requestLine("enter the name of the file to rename:");
 
         if (!nameSourceFile.equals("")) {
@@ -43,7 +43,7 @@ public class RenameFile extends FileManager {
             File fileSource = new File(fullPathToSourceFile);
             //if (fileExist(fullPathToSourceFile)) {
             if (fileSource.exists()) {
-                if (nameTargetFile.equals(""))
+                if (nameTargetFile.equals("") && FileManager.interactivCommand)
                     nameTargetFile = FileManager.requestLine("enter the new name of the file:");
 
                 if (!nameTargetFile.equals("")) {
