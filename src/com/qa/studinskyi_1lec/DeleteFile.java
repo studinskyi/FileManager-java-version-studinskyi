@@ -36,7 +36,8 @@ public class DeleteFile extends FileManager {
             }
 
             if (!nameFile.equals("")) {
-                fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
+                fullPathToFile = folderFile + nameFile; // + File.separator
+                //fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
                 if (fileExist(fullPathToFile)) {
                     //if (f.exists()) {
                     System.out.println("file is deleted: " + fullPathToFile);

@@ -39,7 +39,8 @@ public class RenameFile extends FileManager {
             nameSourceFile = FileManager.requestLine("enter the name of the file to rename:");
 
         if (!nameSourceFile.equals("")) {
-            fullPathToSourceFile = folderFile + nameSourceFile + ".txt"; //+ File.separator
+            fullPathToSourceFile = folderFile + nameSourceFile; //+ File.separator
+            //fullPathToSourceFile = folderFile + nameSourceFile + ".txt"; //+ File.separator
             File fileSource = new File(fullPathToSourceFile);
             //if (fileExist(fullPathToSourceFile)) {
             if (fileSource.exists()) {

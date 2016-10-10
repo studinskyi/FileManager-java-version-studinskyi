@@ -55,7 +55,8 @@ public class Sed extends FileManager {
             wordTarget = FileManager.requestLine("input word to replace");
 
         if (!nameFile.equals("")) {
-            fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
+            fullPathToFile = folderFile + nameFile; // + File.separator
+            //fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
             count = findWordOccurrenceInFile(fullPathToFile, wordSource);
         } else
             System.out.println("file does not exist: " + fullPathToFile);

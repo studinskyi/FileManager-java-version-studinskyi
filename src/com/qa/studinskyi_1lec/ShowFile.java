@@ -29,7 +29,8 @@ public class ShowFile extends FileManager {
             nameFile = FileManager.requestLine("input name of file");
 
         if (!nameFile.equals(""))
-            fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
+            fullPathToFile = folderFile + nameFile; // + File.separator
+            //fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
 
         File file = new File(fullPathToFile);
         if (!file.exists()) {

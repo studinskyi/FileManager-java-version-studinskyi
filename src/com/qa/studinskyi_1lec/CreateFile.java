@@ -65,7 +65,8 @@ public class CreateFile extends FileManager {
             }
 
             if (!nameFile.equals("")) {
-                fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
+                fullPathToFile = folderFile + nameFile; // + File.separator
+                //fullPathToFile = folderFile + nameFile + ".txt"; // + File.separator
                 fileContent = fullPathToFile + lineSeparator + textToFile;
                 //File f = new File(fullPathToFile);
                 if (!fileExist(fullPathToFile)) {
