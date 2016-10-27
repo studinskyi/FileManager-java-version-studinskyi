@@ -1,5 +1,8 @@
-package com.qa.studinskyi_1lec;
+package Test;
 
+import com.qa.studinskyi_1lec.CreateFile;
+import com.qa.studinskyi_1lec.DeleteFile;
+import com.qa.studinskyi_1lec.FileManager;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -26,7 +29,7 @@ public class DeleteFileTest {
     public void deleteFilePositiveTest() {
         System.out.println("Test deleteFilePositiveTest() start");
         // инициализация параметров файлового менеджера при создании файла
-        String currentCommand = "touch test123";
+        String currentCommand = "touch test123.txt";
         FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
 
         // попытка создать файл
@@ -34,7 +37,7 @@ public class DeleteFileTest {
         classCreateFile.execute();
 
         // попытка удалить файл
-        currentCommand = "rm test123";
+        currentCommand = "rm test123.txt";
         FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
 
         // проверка наличия тестового файла перед удалением
@@ -47,9 +50,9 @@ public class DeleteFileTest {
 
         System.out.println("File exist: " + file.exists());
 
-        Boolean existAfaterRunnung = file.exists();
+        Boolean existAfterRunning = file.exists();
         // проверка отсутствия файла
-        assertTrue(existBeforeRunnung && !existAfaterRunnung);
+        assertTrue(existBeforeRunnung && !existAfterRunning);
 
         System.out.println("Test deleteFilePositiveTest() end");
     }

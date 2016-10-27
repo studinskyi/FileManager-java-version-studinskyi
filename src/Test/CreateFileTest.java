@@ -1,5 +1,8 @@
-package com.qa.studinskyi_1lec;
+package Test;
 
+import com.qa.studinskyi_1lec.CreateFile;
+import com.qa.studinskyi_1lec.DeleteFile;
+import com.qa.studinskyi_1lec.FileManager;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -27,7 +30,7 @@ public class CreateFileTest {
     public void сreateFilePositiveTest() {
         System.out.println("Test сreateFilePositiveTest() start");
         // инициализация параметров файлового менеджера при создании файла
-        String currentCommand = "touch test123"; // команда создания файла test123.txt
+        String currentCommand = "touch test123.txt"; // команда создания файла test123.txt
         FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
         // проверка создания тестового файла и реального результата
         puthToFile = FileManager.folderFile + "test123.txt";
@@ -40,7 +43,7 @@ public class CreateFileTest {
         assertTrue(file.exists());
 
         // удаление созданного при тестировании файла
-        currentCommand = "rm test123";
+        currentCommand = "rm test123.txt";
         FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
         DeleteFile classDeleteFile = new DeleteFile();
         classDeleteFile.execute();
@@ -54,7 +57,7 @@ public class CreateFileTest {
         //FileManager.setWorkFolder("test_11111111");
         System.out.println("Test сreateFileNegativeTest() start");
         // инициализация параметров файлового менеджера при создании файла
-        //String currentCommand = "touch test123";
+        //String currentCommand = "touch test123.txt";
         String currentCommand = "touch"; // команда создания файла без указания имени файла (для негативного теста)
         FileManager.updateCommandOption(FileManager.parsingCommandLine(currentCommand));
         // проверка создания тестового файла и реального результата
