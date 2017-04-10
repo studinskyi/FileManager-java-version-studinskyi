@@ -1,5 +1,9 @@
-package com.qa.studinskyi_1lec;
+package Test;
 
+import com.qa.studinskyi_1lec.CreateFile;
+import com.qa.studinskyi_1lec.DeleteFile;
+import com.qa.studinskyi_1lec.FileManager;
+import com.qa.studinskyi_1lec.RenameFile;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
