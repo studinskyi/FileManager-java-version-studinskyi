@@ -14,7 +14,7 @@ import static org.testng.Assert.assertTrue;
 public class CreateDirectoryTest {
     String nameDirectory = "";
     String fullPathDirectory = "";
-    String FileSeparated = File.separator;
+    String fileSeparator = File.separator;
 
     @BeforeTest
     public void setUp() {

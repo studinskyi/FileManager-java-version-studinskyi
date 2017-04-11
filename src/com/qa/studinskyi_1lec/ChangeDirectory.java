@@ -13,7 +13,7 @@ public class ChangeDirectory extends FileManager {
     public void execute() {
         String nameDirectory = "";
         String fullPathDirectory = "";
-        String FileSeparated = File.separator;
+        String fileSeparator = File.separator;
 
         // проверка наличия введенного параметра имени директории
         if (FileManager.commandParameters.size() > 0) {
@@ -43,14 +43,14 @@ public class ChangeDirectory extends FileManager {
 
         } else {
             // приведение пути к новому каталогу в нормальное состояние
-            fullPathDirectory = FileManager.folderFile + FileSeparated + nameDirectory + FileSeparated;
-            String badSlash = (!FileSeparated.equals("/")) ? "/" : "\\";
+            fullPathDirectory = FileManager.folderFile + fileSeparator + nameDirectory + fileSeparator;
+            String badSlash = (!fileSeparator.equals("/")) ? "/" : "\\";
             while (fullPathDirectory.indexOf(badSlash) >= 0) {
-                String replace = fullPathDirectory.replace(badSlash, FileSeparated);
+                String replace = fullPathDirectory.replace(badSlash, fileSeparator);
                 fullPathDirectory = replace;
             }
-            while (fullPathDirectory.contains(FileSeparated + FileSeparated)) {
-                String replace = fullPathDirectory.replace(FileSeparated + FileSeparated, FileSeparated);
+            while (fullPathDirectory.contains(fileSeparator + fileSeparator)) {
+                String replace = fullPathDirectory.replace(fileSeparator + fileSeparator, fileSeparator);
                 fullPathDirectory = replace;
             }
             File fDirectory = new File(fullPathDirectory);
