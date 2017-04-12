@@ -2,16 +2,11 @@
 /target
 *.iml
 
-.idea
-*.iws
-*.iml
-*.ipr
-
+out/
 target/
 
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
+.idea
+*.iws
+*.ipr
+
+
